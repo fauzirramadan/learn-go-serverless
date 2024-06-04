@@ -1,0 +1,24 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: 101102
+service: book-service
+
+plugins:
+  - serverless-offline
+
+provide:
+  name: aws
+  runtime: go1.x
+  stage: local
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true
+
+functions:
+  book-list:
+    name: book-list
+    handler: bin/book
+    events:
+      - http:
+          path: /books
+          method: get
